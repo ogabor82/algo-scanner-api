@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"algosphera/scanner-api/internal/httpserver"
+	httpapi "algosphera/scanner-api/internal/http"
 )
 
 func main() {
@@ -15,9 +15,14 @@ func main() {
 		port = "8080"
 	}
 
+	router, err := httpapi.NewRouter()
+	if err != nil {
+		log.Fatalf("failed to init router: %v", err)
+	}
+
 	srv := &http.Server{
 		Addr:              ":" + port,
-		Handler:           httpserver.NewRouter(),
+		Handler:           router,
 		ReadHeaderTimeout: 5 * time.Second,
 	}
 
