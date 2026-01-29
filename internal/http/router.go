@@ -4,12 +4,13 @@ import (
 	"net/http"
 	"os"
 
-	"algosphera/scanner-api/internal/http/handlers"
-
 	"github.com/go-chi/chi/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
+
+	"algosphera/scanner-api/internal/http/handlers"
 )
 
-func NewRouter() (http.Handler, error) {
+func NewRouter(db *pgxpool.Pool) (http.Handler, error) {
 	r := chi.NewRouter()
 
 	r.Get("/healthz", func(w http.ResponseWriter, r *http.Request) {
@@ -18,6 +19,11 @@ func NewRouter() (http.Handler, error) {
 		w.Write([]byte(`{"ok":true}`))
 	})
 
+	// job create
+	scans := handlers.NewScansHandler(db)
+	r.Post("/scans", scans.CreateScan)
+
+	// results proxy
 	readerBaseURL := os.Getenv("READER_BASE_URL")
 	if readerBaseURL != "" {
 		h, err := handlers.NewResultsHandler(readerBaseURL)
