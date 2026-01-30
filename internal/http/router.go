@@ -22,6 +22,7 @@ func NewRouter(db *pgxpool.Pool) (http.Handler, error) {
 	// job create
 	scans := handlers.NewScansHandler(db)
 	r.Post("/scans", scans.CreateScan)
+	r.Get("/scans/{jobID}", scans.GetScan)
 
 	// results proxy
 	readerBaseURL := os.Getenv("READER_BASE_URL")
