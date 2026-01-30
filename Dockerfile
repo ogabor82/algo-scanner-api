@@ -19,6 +19,9 @@
     
     WORKDIR /app
     COPY --from=build /out/scanner-api /app/scanner-api
+    COPY --from=build /src/ticker_sets /app/ticker_sets
+
+    ENV TICKER_SETS_DIR=/app/ticker_sets
     
     EXPOSE 8080
     

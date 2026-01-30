@@ -9,9 +9,11 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 
 	"algosphera/scanner-api/internal/http/handlers"
+	tickersets "algosphera/scanner-api/internal/tickersets"
+	"encoding/json"
 )
 
-func NewRouter(db *pgxpool.Pool) (http.Handler, error) {
+func NewRouter(db *pgxpool.Pool, cat *tickersets.Catalog) (http.Handler, error) {
 	r := chi.NewRouter()
 
 	r.Use(cors.Handler(cors.Options{
@@ -29,6 +31,12 @@ func NewRouter(db *pgxpool.Pool) (http.Handler, error) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(`{"ok":true}`))
+	})
+
+	r.Get("/ticker-sets", func(w http.ResponseWriter, _ *http.Request) {
+		json.NewEncoder(w).Encode(map[string]any{
+			"items": cat.ListSummaries(),
+		})
 	})
 
 	// job create

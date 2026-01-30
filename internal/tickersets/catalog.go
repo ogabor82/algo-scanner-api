@@ -127,3 +127,43 @@ func dedupeSort(in []string) []string {
 	sort.Strings(out)
 	return out
 }
+
+type SetSummary struct {
+	ID    string `json:"id"`
+	Title string `json:"title"`
+	Count int    `json:"count"`
+}
+
+func (c *Catalog) ListSummaries() []SetSummary {
+	out := make([]SetSummary, 0)
+
+	// determinisztikus sorrend
+	groupKeys := make([]string, 0, len(c.Groups))
+	for gk := range c.Groups {
+		groupKeys = append(groupKeys, gk)
+	}
+	sort.Strings(groupKeys)
+
+	for _, gk := range groupKeys {
+		g := c.Groups[gk]
+
+		setKeys := make([]string, 0, len(g.Sets))
+		for sk := range g.Sets {
+			setKeys = append(setKeys, sk)
+		}
+		sort.Strings(setKeys)
+
+		for _, sk := range setKeys {
+			id := gk + "." + sk
+			title, tickers, err := c.Resolve(id)
+			if err != nil {
+				// listázzuk így is, hogy lásd UI-ból, ha valami hibás
+				out = append(out, SetSummary{ID: id, Title: g.Sets[sk].Title, Count: 0})
+				continue
+			}
+			out = append(out, SetSummary{ID: id, Title: title, Count: len(tickers)})
+		}
+	}
+
+	return out
+}

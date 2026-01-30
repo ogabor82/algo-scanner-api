@@ -10,6 +10,8 @@ import (
 	"algosphera/scanner-api/internal/db"
 	httpapi "algosphera/scanner-api/internal/http"
 
+	tickersets "algosphera/scanner-api/internal/tickersets"
+
 	dotenv "github.com/joho/godotenv"
 )
 
@@ -17,6 +19,15 @@ func main() {
 	err := dotenv.Load()
 	if err != nil {
 		log.Printf("failed to load .env file: %v, continuing without .env", err)
+	}
+
+	catalogDir := os.Getenv("TICKER_SETS_DIR")
+	if catalogDir == "" {
+		catalogDir = "ticker_sets" // local dev default
+	}
+	cat, err := tickersets.LoadDir(catalogDir)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	port := os.Getenv("PORT")
@@ -31,7 +42,7 @@ func main() {
 	}
 	defer pool.Close()
 
-	router, err := httpapi.NewRouter(pool)
+	router, err := httpapi.NewRouter(pool, cat)
 	if err != nil {
 		log.Fatalf("failed to init router: %v", err)
 	}
