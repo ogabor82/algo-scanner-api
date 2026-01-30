@@ -1,0 +1,71 @@
+# Kiegészítő ticker lista a jobb diverzifikációhoz
+#
+# Magyarázók (ticker -> termék):
+#   Nemzetközi:   EFA=MSCI EAFE (developed ex-US), EEM=Emerging Markets, EWJ=Japan, EWZ=Brazil
+#   Volatilitás:  SVXY=ProShares Short VIX (inverse hedge)
+#   Bonds:        IEF=7-10Y Treasury, SHY=1-3Y Treasury, HYG=High Yield Corporate
+#   REIT:         VNQ=Vanguard Real Estate, IYR=iShares Real Estate, XLRE=Real Estate SPDR
+#   Speciális:    XAR=Aerospace & Defense, XBI=Biotech, IBB=iShares Biotech
+#   Defense:      LMT=Lockheed Martin, NOC=Northrop Grumman
+#   Utilities:    DUK=Duke Energy, NEE=NextEra Energy
+#   Defensive:    PG=Procter & Gamble, PEP=PepsiCo, HD=Home Depot
+#   TraderBamboo: LLY, PLTR, ORCL, NVDA
+
+group: extra
+title: "Kiegészítő ticker lista"
+
+sets:
+  # 🌍 Nemzetközi ETF-ek
+  international:
+    title: "🌍 Nemzetközi ETF-ek"
+    tickers: [EFA, EEM, EWJ, EWZ]
+
+  # 📉 Volatilitás / Hedging ETF-ek
+  volatility:
+    title: "📉 Volatilitás / Hedging ETF-ek"
+    tickers: [SVXY]
+
+  # 💵 Fixed Income / Bonds
+  bonds:
+    title: "💵 Fixed Income / Bonds"
+    tickers: [IEF, SHY, HYG]
+
+  # 🏢 REIT-ek / Ingatlan
+  reit:
+    title: "🏢 REIT-ek / Ingatlan"
+    tickers: [VNQ, IYR, XLRE]
+
+  # 🔬 Speciális szektorok
+  special_sector:
+    title: "🔬 Speciális szektorok"
+    tickers: [XAR, XBI, IBB]
+
+  # 🛡️ Defense részvények
+  defense:
+    title: "🛡️ Defense részvények"
+    tickers: [LMT, NOC]
+
+  # 🏠 Utilities heavyweights
+  utility:
+    title: "🏠 Utilities heavyweights"
+    tickers: [DUK, NEE]
+
+  # 🥤 Dividend / Defensive Consumer
+  defensive_consumer:
+    title: "🥤 Dividend / Defensive Consumer"
+    tickers: [PG, PEP, HD]
+
+  # TraderBamboo
+  traderbamboo:
+    title: "TraderBamboo"
+    tickers: [LLY, PLTR, ORCL, NVDA]
+
+  # Teszt
+  test:
+    title: "Teszt"
+    tickers: [ITB, XLP, AFRM, EFA]
+
+  # Összes egyben (traderbamboo és test nélkül, mint az eredeti all_extra)
+  all:
+    title: "Összes kiegészítő"
+    include: [international, volatility, bonds, reit, special_sector, defense, utility, defensive_consumer]

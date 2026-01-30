@@ -1,0 +1,37 @@
+# Iron Condor-barát instrumentumok (alap lista)
+# Olyan tickerek, ahol van likvid opciós piac, általában magasabb IV-vel.
+#
+# Magyarázók (ticker -> termék):
+#   Index ETF:   SPY=S&P 500, QQQ=Nasdaq 100, IWM=Russell 2000, DIA=Dow Jones
+#   Volatilitás: VXX=VIX futures ETF, UVXY=Ultra VIX Short-Term Futures
+#   Szektorok:   XLF=Financials, XLE=Energy, XLK=Technology, XLI=Industrials, ARKK=ARK Innovation
+#   Részvények:  TSLA=Tesla, AMZN=Amazon, META=Meta, NFLX=Netflix, AMD, NVDA=NVIDIA, GME=GameStop
+
+group: ironcondor_friendly
+title: "Iron Condor-barát instrumentumok"
+
+sets:
+  # Index ETF-ek
+  index_etfs:
+    title: "Index ETF-ek"
+    tickers: [SPY, QQQ, IWM, DIA]
+
+  # Volatility / Hedging ETF-ek
+  volatility:
+    title: "Volatility / Hedging ETF-ek"
+    tickers: [VXX, UVXY]
+
+  # Sectors – likvid, általában magasabb IV
+  sectors:
+    title: "Sectors"
+    tickers: [XLF, XLE, XLK, XLI, ARKK]
+
+  # Egyedi részvények – tipikus high IV, likvid opciókkal
+  stocks:
+    title: "Egyedi részvények"
+    tickers: [TSLA, AMZN, META, NFLX, AMD, NVDA, GME]
+
+  # Összes egyben
+  all:
+    title: "Összes iron condor-barát"
+    include: [index_etfs, volatility, sectors, stocks]

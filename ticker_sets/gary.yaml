@@ -1,0 +1,94 @@
+# Gary teljes tickerlistája kategóriákra bontva
+#
+# Magyarázók / kategóriák:
+#   ETF-ek:       SPY, QQQ, DIA, IWM, szektorok (XLF, XLE...), ARKK, GLD, SLV, USO, stb.
+#   Tech:         AAPL, MSFT, NVDA, META, GOOG, PLTR, AMD, SMCI, stb.
+#   Financials:   JPM, BAC, V, MA, COIN, MSTR, stb.
+#   Healthcare:   PFE, MRK, JNJ, ABBV, BMY, MO, CVS, XLV
+#   Energy:       XOM, CVX, BP, OXY, COP, USO, AA, FCX, CCJ
+#   Consumer:     KO, WMT, TGT, COST, NKE, TSLA, ABNB, stb.
+#   Industrials:  CAT, GE, UPS, FDX, AAL, DAL, UAL, BA
+#   Telecom:      T, VZ, XLU
+#   Speculative:  BYND, GME, ZIM, CVNA, RIVN, stb.
+#   Cheap:        <100 USD körüli tickerek
+#   Baby account: EWZ, FXI, XLF, SLV, KBE (gyakorlásra)
+#   Crypto ETF:   BITO, IBIT, ETH, ETHE, SOLZ, stb.
+
+group: gary
+title: "Gary teljes tickerlistája"
+
+sets:
+  # 1. ETF-ek
+  etfs:
+    title: "ETF-ek"
+    tickers: [SPY, QQQ, DIA, IWM, RUT, SPX, XSP, SSO, XLF, XLE, XLI, XLK, XLP, XLU, XLV, XLY, XHB, ARKK, GLD, SLV, USO, GDX, CCJ, FXI, BITO, IBIT, ETH, UVXY, VIX, VXX]
+
+  # 2. Tech / Growth / AI
+  tech:
+    title: "Tech / Growth / AI"
+    tickers: [AAPL, MSFT, AMZN, META, GOOG, NVDA, ORCL, IBM, INTC, QCOM, TXN, CRM, PYPL, PINS, EBAY, SNAP, ZM, AMD, SMCI, MU, ARM, SMH, PLTR, RBLX, ROKU, LYFT, UBER]
+
+  # 3. Financials
+  financials:
+    title: "Financials"
+    tickers: [JPM, BAC, C, WFC, GS, MS, V, MA, AXP, COIN, MSTR, MARA, RIOT]
+
+  # 4. Healthcare / Pharma
+  healthcare:
+    title: "Healthcare / Pharma"
+    tickers: [PFE, MRK, JNJ, ABBV, BMY, MO, CVS, XLV]
+
+  # 5. Energy / Commodities
+  energy:
+    title: "Energy / Commodities"
+    tickers: [XOM, CVX, BP, OXY, COP, XLE, USO, AA, FCX, CCJ]
+
+  # 6. Consumer / Retail
+  consumer:
+    title: "Consumer / Retail"
+    tickers: [KO, WMT, TGT, COST, XLP, NKE, LOW, SBUX, MCD, MGM, WYNN, LVS, XLY, ABNB, DKNG, RIVN, TSLA]
+
+  # 7. Industrials / Transport
+  industrials:
+    title: "Industrials / Transport"
+    tickers: [CAT, GE, UPS, FDX, AAL, DAL, UAL, BA]
+
+  # 8. Telecom / Utilities
+  telecom:
+    title: "Telecom / Utilities"
+    tickers: [T, VZ, XLU]
+
+  # 9. Speculative / Meme / High-vol
+  speculative:
+    title: "Speculative / Meme / High-vol"
+    tickers: [BYND, GME, ZIM, CVNA, NCLH, CCL, RIVN, SMCI, RIOT, MARA, SNAP, LYFT, XPEV]
+
+  # 10. Összes (fő kategóriák)
+  all:
+    title: "Összes"
+    include: [etfs, tech, financials, healthcare, energy, consumer, industrials, telecom, speculative]
+
+  # 11. Olcsó tickerek (kb. <100 USD)
+  cheap:
+    title: "Olcsó tickerek"
+    tickers: [BYND, SNAP, UVXY, F, AAL, RIVN, ZIM, RIOT, MARA, BITO, LYFT, XPEV, PFE, INTC, NCLH, GME, T, CCL, AA, BP, VXX, MGM, PINS, SLV, FXI, ETH, DKNG, VZ, SMCI, FCX, BMY, OXY, BAC, LVS, XLF, DAL, GM, MO, KO, IBIT, PYPL, CSCO, GDX, NKE, CVS, USO, XLP, CCJ, ARKK, MRK, WFC, XLU, SBUX, ZM, UPS, EBAY, TGT, XLE, TLT, COP, UBER, ROKU, C]
+
+  # Olcsó ETF-ek
+  cheap_etfs:
+    title: "Olcsó ETF-ek"
+    tickers: [IWM, XLF, FXI, EWZ]
+
+  # Baby account ETF-ek (gyakorlásra)
+  baby_account_etfs:
+    title: "Baby account ETF-ek"
+    tickers: [EWZ, FXI, XLF, SLV, KBE]
+
+  # Crypto ETF-ek
+  crypto_etfs:
+    title: "Crypto ETF-ek"
+    tickers: [BITO, IBIT, ETH, ETHE, SOLZ, SSK, XRPI, UXRP]
+
+  # Commodities
+  commodities:
+    title: "Commodities"
+    tickers: [GLD, SLV, USO, GDX, CCJ, FXI, BITO, IBIT, ETH, UVXY, VXX]

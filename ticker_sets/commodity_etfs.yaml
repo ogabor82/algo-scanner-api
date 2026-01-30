@@ -1,0 +1,42 @@
+# Commodity ETF lista – kategóriákra bontva
+#
+# Magyarázók (ticker -> termék):
+#   Energia:     USO=United States Oil Fund (WTI), BNO=Brent Oil, UNG=Natural Gas, XLE=Energy Select Sector SPDR
+#   Nemesfémek:  GLD=SPDR Gold, IAU=iShares Gold, SLV=iShares Silver, PPLT=Aberdeen Platinum, PALL=Aberdeen Palladium
+#   Ipari fémek: CPER=US Copper Index, JJC=iPath Bloomberg Copper ETN, JJN=Nickel ETN, JJT=Tin ETN
+#   Mezőgazdaság: DBA=DB Agriculture, CORN=Teucrium Corn, WEAT=Wheat, SOYB=Soybean, CANE=Sugar, JO=Coffee ETN, NIB=Cocoa ETN
+#   Indexek:     DBC=DB Commodity Index, GSG=iShares S&P GSCI, PDBC=Invesco Optimum Yield Diversified Commodity
+
+group: commodity
+title: "Commodity ETF lista"
+
+sets:
+  # ⚡ Energia
+  energy:
+    title: "⚡ Energia"
+    tickers: [USO, BNO, UNG, XLE]
+
+  # 🪙 Nemesfémek
+  precious_metals:
+    title: "🪙 Nemesfémek"
+    tickers: [GLD, IAU, SLV, PPLT, PALL]
+
+  # 🏭 Ipari fémek
+  industrial_metals:
+    title: "🏭 Ipari fémek"
+    tickers: [CPER, JJC, JJN, JJT]
+
+  # 🌽 Mezőgazdaság
+  agriculture:
+    title: "🌽 Mezőgazdaság"
+    tickers: [DBA, CORN, WEAT, SOYB, CANE, JO, NIB]
+
+  # 🔀 Diversifikált commodity indexek
+  commodity_index:
+    title: "🔀 Diversifikált commodity indexek"
+    tickers: [DBC, GSG, PDBC]
+
+  # Összes egyben
+  all:
+    title: "Összes commodity"
+    include: [energy, precious_metals, industrial_metals, agriculture, commodity_index]

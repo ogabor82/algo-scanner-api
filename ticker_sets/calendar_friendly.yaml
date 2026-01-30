@@ -1,0 +1,43 @@
+# Calendar-barát instrumentumok (alap lista)
+# Általában alacsonyabb volatilitású, stabilabb szektorokból kerülnek ki.
+#
+# Magyarázók (ticker -> termék):
+#   Consumer Staples: PEP=PepsiCo, KO=Coca-Cola, PG=Procter & Gamble, XLP=Consumer Staples ETF
+#   Utilities:        XLU=Utilities ETF, DUK=Duke Energy, NEE=NextEra Energy
+#   Real Estate:      VNQ=Vanguard Real Estate, IYR=iShares US Real Estate, XLRE=Real Estate SPDR
+#   Agrár:            CORN=Teucrium Corn, WEAT=Wheat, SOYB=Soybean, DBA=Invesco DB Agriculture
+#   Bond ETF-ek:      SHY=1-3Y US Treasuries, IEF=7-10Y US Treasuries, TLT=20+Y US Treasuries
+
+group: calendar_friendly
+title: "Calendar-barát instrumentumok"
+
+sets:
+  # Consumer Staples
+  consumer_staples:
+    title: "Consumer Staples"
+    tickers: [PEP, KO, PG, XLP]
+
+  # Utilities
+  utilities:
+    title: "Utilities"
+    tickers: [XLU, DUK, NEE]
+
+  # Real Estate / REITs
+  real_estate:
+    title: "Real Estate / REITs"
+    tickers: [VNQ, IYR, XLRE]
+
+  # Agrár / Commodities
+  agriculture:
+    title: "Agrár / Commodities"
+    tickers: [CORN, WEAT, SOYB, DBA]
+
+  # Bond ETF-ek
+  bonds:
+    title: "Bond ETF-ek"
+    tickers: [SHY, IEF, TLT]
+
+  # Összes egyben
+  all:
+    title: "Összes calendar-barát"
+    include: [consumer_staples, utilities, real_estate, agriculture, bonds]
