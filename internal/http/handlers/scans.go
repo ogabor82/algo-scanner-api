@@ -6,6 +6,10 @@ import (
 	"net/http"
 	"time"
 
+	"net/http/httputil"
+
+	"net/url"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -24,8 +28,30 @@ type ScansHandler struct {
 	DB *pgxpool.Pool
 }
 
+type RunsHandler struct {
+	Proxy *httputil.ReverseProxy
+}
+
 func NewScansHandler(db *pgxpool.Pool) *ScansHandler {
 	return &ScansHandler{DB: db}
+}
+
+func NewRunsHandler(readerBaseURL string) (*RunsHandler, error) {
+	u, err := url.Parse(readerBaseURL)
+	if err != nil {
+		return nil, err
+	}
+
+	p := httputil.NewSingleHostReverseProxy(u)
+
+	// Ensure Host header matches the target (helps in some envs)
+	orig := p.Director
+	p.Director = func(r *http.Request) {
+		orig(r)
+		r.Host = u.Host
+	}
+
+	return &RunsHandler{Proxy: p}, nil
 }
 
 type GetScanResponse struct {
@@ -126,4 +152,19 @@ func (h *ScansHandler) GetScan(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(resp)
+}
+
+// GET /scans  ->  GET {READER_BASE_URL}/runs?strategy=calendar&limit=20
+
+func (h *RunsHandler) GetRuns(w http.ResponseWriter, r *http.Request) {
+	strategy := r.URL.Query().Get("strategy")
+	limit := r.URL.Query().Get("limit")
+
+	r.URL.Path = "/scan_jobs"
+	q := r.URL.Query()
+	q.Set("strategy", strategy)
+	q.Set("limit", limit)
+	r.URL.RawQuery = q.Encode()
+
+	h.Proxy.ServeHTTP(w, r)
 }

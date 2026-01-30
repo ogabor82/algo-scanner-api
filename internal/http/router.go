@@ -31,7 +31,12 @@ func NewRouter(db *pgxpool.Pool) (http.Handler, error) {
 		if err != nil {
 			return nil, err
 		}
+		runs, err := handlers.NewRunsHandler(readerBaseURL)
+		if err != nil {
+			return nil, err
+		}
 		r.Get("/scans/{jobID}/results", h.GetResults)
+		r.Get("/runs", runs.GetRuns)
 	}
 
 	return r, nil
